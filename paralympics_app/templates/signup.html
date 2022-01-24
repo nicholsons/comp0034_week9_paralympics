@@ -1,0 +1,43 @@
+{% extends 'layout.html' %}
+{% from "_formhelpers.html" import render_field %}
+{% block content %}
+
+    {# Version using _formhelpers see: https://flask.palletsprojects.com/en/2.0.x/patterns/wtforms/#forms-in-templates #}
+    <form method=post action="{{ url_for('auth.signup') }}">
+        {{ form.csrf_token }}
+        <dl>
+            {{ render_field(form.first_name, class="form-control") }}
+            {{ render_field(form.last_name, class="form-control") }}
+            {{ render_field(form.email, class="form-control") }}
+            {{ render_field(form.password, class="form-control") }}
+            {{ render_field(form.password_repeat, class="form-control") }}
+        </dl>
+        <p><button type="submit" class="btn btn-primary">Sign up</button></p>
+    </form>
+
+    {# This version doesn't use the _formhelpers
+    <form method="POST" action="{{ url_for('auth.signup') }}" class="row g3">
+        {{ form.csrf_token }}
+        <div class="col-md-6">
+            {{ form.first_name.label(class='form-label') }} {{ form.first_name(class='form-control') }}
+        </div>
+        <div class="col-md-6">
+            {{ form.last_name.label(class='form-label') }} {{ form.last_name(class='form-control') }}
+        </div>
+        <div class="col-md-12">
+            {{ form.email.label(class='form-label') }} {{ form.email(class='form-control') }}
+        </div>
+        <div class="col-md-6">
+            {{ form.password.label(class='form-label') }} {{ form.password(class='form-control') }}
+        </div>
+        <div class="col-md-6">
+            {{ form.password_repeat.label(class='form-label') }} {{ form.password_repeat(class='form-control') }}
+        </div>
+        <div class="col-12">
+            <br>
+            <button type="submit" class="btn btn-primary">Sign up</button>
+        </div>
+    </form>
+    #}
+
+{% endblock %}

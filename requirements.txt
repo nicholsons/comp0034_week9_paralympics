@@ -1,0 +1,12 @@
+dash
+pandas
+dash-bootstrap-components
+flask
+Flask-WTF
+Flask-SQLAlchemy
+Flask-Login
+plotly
+pytest
+pytest-cov
+selenium
+Flask-Reuploaded

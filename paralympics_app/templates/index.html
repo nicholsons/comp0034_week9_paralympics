@@ -1,0 +1,12 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <br>
+    <h1>Paralympic events</h1>
+    {% for img in images %}
+        <div class="float-start p-2 mx-3 text-center">
+            <img height=100 id="img-{{ img[2] }}-{{ img[1] }}" src="{{ url_for('static', filename='images/logos/') }}{{ img[0] }}"
+                 alt="{{ img[2] }} {{ img[1] }}">
+            <p>{{ img[2] }} {{ img[1] }}</p>
+        </div>
+    {% endfor %}
+{% endblock %}

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.js') }}" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js"
+            integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous"
+            async></script>
+    <title>{{ title }}</title>
+    {% block extra_tags %}{% endblock %}
+</head>
+<body>
+<header class="container-fluid">
+    <br>
+    {% include 'navbar.html' %}
+</header>
+<div id="flash-messages">
+    {# Displays flashed messages on a page #}
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <p class="alert alert-info" role="alert">{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+</div>
+<main>
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+</main>
+</body>
+</html>

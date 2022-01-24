@@ -1,0 +1,12 @@
+{% extends 'layout.html' %}
+{% from "_formhelpers.html" import render_field %}
+{% block content %}
+    <form method=post action="{{ url_for('main.competition') }}">
+        {{ form.csrf_token }}
+        <dl>
+            {{ render_field(form.q1, class="form-control") }}
+            {{ render_field(form.q2, class="form-control") }}
+        </dl>
+        <p><button type="submit" class="btn btn-primary">Enter</button></p>
+    </form>
+{% endblock %}
