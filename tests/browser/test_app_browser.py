@@ -51,7 +51,7 @@ class TestAppBrowser:
         self.driver.implicitly_wait(10)
 
         # Assert that browser redirects to index page
-        assert self.driver.current_url == 'http://127.0.0.1:5000/'
+        assert self.driver.current_url == url_for('main.index')
 
         # Assert success message is flashed on the index page
         message = self.driver.find_element_by_class_name("list-unstyled").find_element_by_tag_name("li").text
