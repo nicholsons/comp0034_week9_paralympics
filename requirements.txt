@@ -10,4 +10,5 @@ pytest
 coverage
 pytest-cov
 selenium
+requests
 Flask-Reuploaded
