@@ -19,25 +19,6 @@ def index():
     return render_template('index.html', title='Home page', images=images)
 
 
-def get_logos():
-    """
-    Checks the logos directory and returns a list information about the logos for each paralympics
-    :return: images: A list with the logo file name, year and event name for each paralympic event
-    """
-    img_list = []
-    # TODO: Consider using context with url_for() instead of Path
-    img_directory = Path(__file__).parent.parent.joinpath('static', 'images', 'logos')
-    for filename in os.listdir(img_directory):
-        img_list.append(filename)
-    img_df = pd.DataFrame(img_list, columns=['filename'])
-    img_df['year'] = img_df['filename'].str[:4]
-    img_df['event'] = img_df['filename'].str[5:-4]
-    img_df.sort_values(by=['year'], inplace=True)
-    img_df.reset_index(inplace=True, drop=True)
-    images = img_df.values.tolist()
-    return images
-
-
 @main_bp.route('/profile', methods=['GET', 'POST'])
 @login_required
 def profile():
@@ -129,3 +110,22 @@ def competition():
             flash(f'Error, competition entry not saved. Please try again.', 'error')
             return redirect(url_for('main.competition'))
     return render_template('competition.html', title='Competition', form=comp_form)
+
+
+def get_logos():
+    """
+    Checks the logos directory and returns a list information about the logos for each paralympics
+    :return: images: A list with the logo file name, year and event name for each paralympic event
+    """
+    img_list = []
+    # TODO: Consider using context with url_for() instead of Path
+    img_directory = Path(__file__).parent.parent.joinpath('static', 'images', 'logos')
+    for filename in os.listdir(img_directory):
+        img_list.append(filename)
+    img_df = pd.DataFrame(img_list, columns=['filename'])
+    img_df['year'] = img_df['filename'].str[:4]
+    img_df['event'] = img_df['filename'].str[5:-4]
+    img_df.sort_values(by=['year'], inplace=True)
+    img_df.reset_index(inplace=True, drop=True)
+    images = img_df.values.tolist()
+    return images

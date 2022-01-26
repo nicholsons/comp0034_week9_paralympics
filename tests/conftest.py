@@ -1,4 +1,7 @@
+import multiprocessing
+
 import pytest
+from selenium.webdriver import Chrome, ChromeOptions
 
 from paralympics_app import create_app, config, add_medals_data, add_noc_data, db as _db
 from paralympics_app.models import User
@@ -29,8 +32,8 @@ def db(app):
         _db.create_all()
         add_medals_data(_db)
         add_noc_data(_db)
-        yield _db
-        _db.drop_all()
+    yield _db
+    _db.drop_all()
 
 
 @pytest.fixture(scope='function', autouse=True)
@@ -84,3 +87,34 @@ def user_with_profile():
     user = User(first_name=user_data['first_name'], last_name=user_data['last_name'], email=user_data['email'],
                 password_text=user_data['password_text'])
     yield user
+
+
+@pytest.fixture(scope='class')
+def run_app(app):
+    """
+    Fixture to run the Flask app for Selenium tests
+    """
+    multiprocessing.set_start_method("fork")  # Needed in Python 3.8 and later
+    process = multiprocessing.Process(target=app.run, args=())
+    process.start()
+    yield process
+    process.terminate()
+
+
+@pytest.fixture(scope='class')
+def chrome_driver(request):
+    """ Selenium webdriver with options to support running in GitHub actions
+    Note:
+        For CI: `window-size` to be commented out and `headless` not
+        For running on your computer: `headless` to be commented out and `window-size` not
+    """
+    options = ChromeOptions()
+    # options.add_argument("--headless")
+    options.add_argument("--no-sandbox")
+    options.add_argument("--disable-dev-shm-usage")
+    options.add_argument("--disable-gpu")
+    options.add_argument("--window-size=1920,1080")  # use only when not in headless
+    chrome_driver = Chrome(options=options)
+    request.cls.driver = chrome_driver
+    yield
+    chrome_driver.close()

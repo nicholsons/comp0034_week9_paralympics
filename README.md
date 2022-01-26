@@ -7,10 +7,13 @@ https://xvrdm.github.io/2017/07/03/testing-flask-sqlalchemy-database-with-pytest
 https://understandingdata.com/list-of-python-assert-statements-for-unit-tests/
 https://blog.miguelgrinberg.com/post/unit-testing-applications-that-use-flask-login-and-flask-socketio
 https://dev.to/michaelbukachi/an-easier-way-to-test-flask-authentication-18ei
-
-remember: WTF_CSRF_ENABLED = False
-add pytest.ini
-
 https://zetcode.com/python/selenium/
 
-flask-testing  
+
+remember: WTF_CSRF_ENABLED = False
+DEBUG = False
+
+https://www.selenium.dev/documentation/webdriver/elements/finders/
+
+
+

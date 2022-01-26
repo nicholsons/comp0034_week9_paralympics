@@ -1,6 +1,3 @@
-from flask import url_for, current_app
-from flask_login import current_user
-
 from paralympics_app.models import User
 
 
@@ -17,18 +14,16 @@ def logout(client):
     return client.get('/logout', follow_redirects=True)
 
 
-def test_user_can_logout(new_user, test_client, app):
+def test_user_login_success(new_user, test_client, app, db):
     """
     GIVEN a user with a valid username and password
-    WHEN the user logs in and logs out successfully
-    THEN their status is anonymous
+    WHEN the user logs in
+    THEN a HTTP 200 code is received
     """
+    db.session.add(new_user)
+    db.session.commit()
     response = login(test_client, email=new_user.email, password=new_user.password)
     assert response.status_code == 200
-    #assert current_user is False
-    #logout(test_client)
-    #assert current_user.is_anonymous is True
-    # with test_client as client: ??
 
 
 def test_signup_succeeds(test_client):
