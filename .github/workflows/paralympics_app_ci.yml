@@ -33,10 +33,4 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test with pytest (excluding Selenium)
       run: |
-        pytest --verbose --cov=paralympics_app --ignore=tests/browser/
-    - name: Test with pytest (Selenium)
-      # working-directory: paralympics_app
-      run: |    
-        # python3 app.py
-        # sleep 5
-        pytest --verbose tests/browser/
+        pytest --verbose --cov-report=term-missing --cov=paralympics_app
