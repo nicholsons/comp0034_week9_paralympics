@@ -35,8 +35,8 @@ jobs:
       run: |
         pytest --verbose --cov=paralympics_app --ignore=tests/browser/
     - name: Test with pytest (Selenium)
-      working-directory: paralympics_app
+      # working-directory: paralympics_app
       run: |    
-        python3 app.py
-        sleep 5
-        pytest --verbose tests/browser
+        # python3 app.py
+        # sleep 5
+        pytest --verbose tests/browser/ --no-start-live-server --live-server-port=5000
