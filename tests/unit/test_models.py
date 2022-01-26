@@ -1,7 +1,29 @@
 from paralympics_app.models import User
 
 
-def test_new_user(new_user):
+def test_user_table_empty():
+    """
+    GIVEN a newly created test_client
+    WHEN the User table is queried
+    THEN it should return zero rows
+    """
+    rows = User.query.count()
+    assert rows == 0
+
+
+def test_user_table_has_one_row(db, new_user):
+    """
+        GIVEN a newly created test_client
+        WHEN a new user is inserted in the User table
+        THEN it should return one row
+        """
+    db.session.add(new_user)
+    db.session.commit()
+    rows = User.query.count()
+    assert rows == 1
+
+
+def test_new_user_details_correct(new_user, test_client):
     """
     GIVEN a User model
     WHEN a new User is created

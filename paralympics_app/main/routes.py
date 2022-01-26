@@ -1,7 +1,8 @@
 import os
+from pathlib import Path
 
 import pandas as pd
-from flask import Blueprint, render_template, flash, redirect, url_for, request
+from flask import Blueprint, render_template, flash, redirect, url_for, request, current_app
 from flask_login import current_user, login_required
 from sqlalchemy.exc import IntegrityError
 
@@ -24,7 +25,9 @@ def get_logos():
     :return: images: A list with the logo file name, year and event name for each paralympic event
     """
     img_list = []
-    for filename in os.listdir('static/images/logos'):
+    # TODO: Consider using context with url_for() instead of Path
+    img_directory = Path(__file__).parent.parent.joinpath('static', 'images', 'logos')
+    for filename in os.listdir(img_directory):
         img_list.append(filename)
     img_df = pd.DataFrame(img_list, columns=['filename'])
     img_df['year'] = img_df['filename'].str[:4]

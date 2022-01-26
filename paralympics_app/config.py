@@ -21,4 +21,6 @@ class DevelopmentConfig(Config):
 
 class TestingConfig(Config):
     TESTING = True
-    SQLALCHEMY_ECHO = True
+    WTF_CSRF_ENABLED = False
+    # SQLALCHEMY_ECHO = True
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + str(Path(__file__).parent.joinpath('data', 'paralympics_testdb.sqlite'))
