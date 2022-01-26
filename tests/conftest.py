@@ -108,12 +108,12 @@ def run_app(app):
 def chrome_driver(request):
     """ Selenium webdriver with options to support running in GitHub actions
     Note:
-        For CI: `window-size` to be commented out and `headless` not
-        For running on your computer: `headless` to be commented out and `window-size` not
+        For CI: `headless` not commented out
+        For running on your computer: `headless` to be commented out
     """
     options = ChromeOptions()
     options.add_argument("--headless")  # use for GitHub Actions CI
-    # options.add_argument("--window-size=1920,1080")  # use when not in headless
+    options.add_argument("--window-size=1920,1080")
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
     options.add_argument("--disable-gpu")
