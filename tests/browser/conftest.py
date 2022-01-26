@@ -1,6 +1,7 @@
 # Fixtures for the Selenium tests only
 import multiprocessing
 
+import pytest_flask
 import pytest
 from selenium.webdriver import Firefox, Chrome, ChromeOptions
 from selenium.webdriver.firefox.options import Options
