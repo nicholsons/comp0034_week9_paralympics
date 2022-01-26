@@ -4,7 +4,7 @@ import pytest
 from selenium.webdriver import Chrome, ChromeOptions
 
 from paralympics_app import create_app, config, add_medals_data, add_noc_data, db as _db
-from paralympics_app.models import User
+from paralympics_app.models import User, Profile
 
 
 @pytest.fixture(scope='session')
@@ -84,8 +84,11 @@ def user_with_profile():
         'username': 'AK',
         'bio': 'My favourite paralympic sport is dressage.'
     }
+
+    profile = Profile(username=profile_data['username'], bio=profile_data['bio'])
     user = User(first_name=user_data['first_name'], last_name=user_data['last_name'], email=user_data['email'],
                 password_text=user_data['password_text'])
+    user.profile.append(profile)
     yield user
 
 
@@ -109,7 +112,7 @@ def chrome_driver(request):
         For running on your computer: `headless` to be commented out and `window-size` not
     """
     options = ChromeOptions()
-    options.add_argument("--headless") # use for GitHub Actions CI
+    options.add_argument("--headless")  # use for GitHub Actions CI
     # options.add_argument("--window-size=1920,1080")  # use when not in headless
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")

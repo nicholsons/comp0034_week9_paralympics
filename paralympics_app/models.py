@@ -11,6 +11,7 @@ class User(UserMixin, db.Model):
     last_name = db.Column(db.Text, nullable=False)
     email = db.Column(db.Text, unique=True, nullable=False)
     password = db.Column(db.Text, nullable=False)
+    profile = db.relationship('Profile', back_populates='user')
 
     def __init__(self, first_name: str, last_name: str, email: str, password_text: str):
         """
@@ -43,6 +44,7 @@ class Profile(db.Model):
     bio = db.Column(db.Text)
     region_id = db.Column(db.Integer, db.ForeignKey('region.id'))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    user = db.relationship('User', back_populates='profile')
 
 
 class Region(db.Model):

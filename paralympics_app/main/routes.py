@@ -2,7 +2,7 @@ import os
 from pathlib import Path
 
 import pandas as pd
-from flask import Blueprint, render_template, flash, redirect, url_for, request, current_app
+from flask import Blueprint, render_template, flash, redirect, url_for, request
 from flask_login import current_user, login_required
 from sqlalchemy.exc import IntegrityError
 
@@ -103,11 +103,11 @@ def competition():
         try:
             db.session.add(entry)
             db.session.commit()
-            flash(f"Competition entry saved.")
+            flash("Competition entry saved.")
             return redirect(url_for('main.index'))
         except IntegrityError:
             db.session.rollback()
-            flash(f'Error, competition entry not saved. Please try again.', 'error')
+            flash('Error, competition entry not saved. Please try again.', 'error')
             return redirect(url_for('main.competition'))
     return render_template('competition.html', title='Competition', form=comp_form)
 
