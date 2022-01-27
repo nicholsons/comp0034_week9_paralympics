@@ -20,8 +20,9 @@ class DevelopmentConfig(Config):
 
 
 class TestingConfig(Config):
-    DEBUG = False
+    # DEBUG = False
     TESTING = True
     WTF_CSRF_ENABLED = False
     # SQLALCHEMY_ECHO = True
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + str(Path(__file__).parent.joinpath('data', 'paralympics_testdb.sqlite'))
+    # SQLALCHEMY_DATABASE_URI = 'sqlite:///' + str(Path(__file__).parent.joinpath('data', 'paralympics_testdb.sqlite'))
+    SQLALCHEMY_DATABASE_URI = "sqlite://"

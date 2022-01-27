@@ -1,3 +1,5 @@
+from time import sleep
+
 import pytest
 from selenium.webdriver.common.by import By
 
@@ -10,6 +12,7 @@ class TestAppBrowser:
 
     def test_app_is_running(self):
         """ Check the app is running"""
+        sleep(5)
         self.driver.get('http://127.0.0.1:5000/')
         assert self.driver.title == 'Home'
 

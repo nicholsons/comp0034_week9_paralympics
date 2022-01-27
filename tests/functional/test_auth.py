@@ -45,3 +45,22 @@ def test_signup_succeeds(test_client):
     assert count2 - count == 1
     assert response.status_code == 200
     assert b'Person' in response.data
+
+
+"""
+GIVEN a User has been created
+WHEN the user logs in with the wrong email address
+THEN then an error message should be displayed on the login form ('No account found with that email address.')
+"""
+
+"""
+GIVEN a User has been created
+WHEN the user logs in with the wrong password
+THEN then an error message should be displayed on the login form ('Incorrect password.')
+"""
+
+"""
+GIVEN a User logged out
+WHEN they access the navigation bar
+THEN there should be an option to login in
+"""

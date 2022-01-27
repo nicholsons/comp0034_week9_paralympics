@@ -92,6 +92,15 @@ def user_with_profile():
     yield user
 
 
+@pytest.fixture(scope='function')
+def login_default_user(test_client, user_data):
+    """Log in the user and logout at the end of the test"""
+    test_client.post('/login', data=dict(email=user_data['email'], password=user_data['password_text']),
+                     follow_redirects=True)
+    yield
+    test_client.get('/logout', follow_redirects=True)
+
+
 @pytest.fixture(scope='class')
 def run_app(app):
     """
@@ -114,9 +123,9 @@ def chrome_driver(request):
     options = ChromeOptions()
     options.add_argument("--headless")  # use for GitHub Actions CI
     options.add_argument("--window-size=1920,1080")
-    options.add_argument("--no-sandbox")
-    options.add_argument("--disable-dev-shm-usage")
-    options.add_argument("--disable-gpu")
+    # options.add_argument("--no-sandbox")
+    # options.add_argument("--disable-dev-shm-usage")
+    # options.add_argument("--disable-gpu")
     chrome_driver = Chrome(options=options)
     request.cls.driver = chrome_driver
     yield
