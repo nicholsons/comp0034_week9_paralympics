@@ -51,7 +51,3 @@ class TestAppBrowser:
         # Assert success message is flashed on the index page
         message = self.driver.find_element(By.ID, "flash-messages").text
         assert f"Hello, {first_name} {last_name}. You are signed up." in message
-
-
-def document_initialised(driver):
-    return driver.execute_script("return initialised")

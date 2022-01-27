@@ -18,6 +18,7 @@ def test_dashboard_not_allowed_when_user_not_logged_in(test_client):
     assert response.status_code == 200
     assert b'Login' in response.data
 
+
 '''
 TODO: Fix this test!
 def test_dashboard_allowed_when_user_is_logged_in(test_client, login_default_user):
